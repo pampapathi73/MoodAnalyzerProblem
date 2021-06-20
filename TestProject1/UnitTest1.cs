@@ -40,4 +40,32 @@ namespace TestProject1
             //Assert
             Assert.AreEqual(expected, actual);
         }
+        [Test]
+        public void GivenNullUsingCustomException()
+        {
+            try
+            {
+                //Arrange
+                MoodAnalyser moodAnalyser = new MoodAnalyser(null);
+                //Act
+                string actual = moodAnalyser.AnalyseMood();
+            }
+            catch (MoodAnalyserCustomException exception)
+            {
+                //Assert
+                Assert.AreEqual("Mood should not be null", exception.Message);
+            }
+        }
+
+        [Test]
+        public void GivenEmptyUsingCustomException()
+        {
+            //Arrange
+            MoodAnalyser moodAnalyser = new MoodAnalyser("");
+            string expected = "Mood should not be empty";
+            //Act
+            string actual = moodAnalyser.AnalyseMood();
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
     }   }
