@@ -11,6 +11,14 @@ namespace MoodAnalyzerProblem
             string mood = Console.ReadLine();
             MoodAnalyser moodAnalyser = new MoodAnalyser(mood);
             Console.WriteLine("Currently you are in: " + moodAnalyser.AnalyseMood());
+            try
+            {
+                MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyzerProblem.MoodAnalyser", "MoodAnalyser");
+            }
+            catch (MoodAnalyserCustomException exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
         }
     }
 }
