@@ -13,7 +13,7 @@ namespace MoodAnalyzerProblem
             Console.WriteLine("Currently you are in: " + moodAnalyser.AnalyseMood());
             try
             {
-                MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyzerProblem.MoodAnalyser", "MoodAnalyser");
+                MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyzerProblem.MoodAnalyser", "MoodAnalyser", null);
             }
             catch (MoodAnalyserCustomException exception)
             {

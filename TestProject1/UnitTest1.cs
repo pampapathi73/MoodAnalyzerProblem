@@ -76,7 +76,7 @@ namespace TestProject1
             //Arrange
             var expected = new MoodAnalyser("");
             //Act
-            object result = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyzerProblem.MoodAnalyser", "MoodAnalyser");
+            object result = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyzerProblem.MoodAnalyser", "MoodAnalyser", null); ;
             //Assert
             expected.Equals(result);
         }
@@ -90,7 +90,7 @@ namespace TestProject1
             try
             {
                 //Act
-                object result = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyzerProblemDifferent.MoodAnalyser", "MoodAnalyser");
+                object result = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyzerProblemDifferent.MoodAnalyser", "MoodAnalyser",null);
             }
             catch (MoodAnalyserCustomException exception)
             {
@@ -108,7 +108,7 @@ namespace TestProject1
             try
             {
                 //Act
-                object result = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyzerProblem.MoodAnalyser", "MoodAnalyserDifferent");
+                object result = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyzerProblem.MoodAnalyser", "MoodAnalyserDifferent" ,null);
             }
             catch (MoodAnalyserCustomException exception)
             {
@@ -116,7 +116,55 @@ namespace TestProject1
                 Assert.AreEqual("Exception: constructor not found in the class", exception.Message);
             }
         }
+        /// UC 5.1 : Given mood analyser class name and message should create mood analyser parameterized object.
+        /// </summary>
+        [Test]
+        public void GivenMoodAnalyserClassNameAndMessage_ReturnMoodAnalyserParameterizedObject()
+        {
+            //Arrange
+            var expected = new MoodAnalyser("happy");
+            //Act
+            object result = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyzerProblem.MoodAnalyser", "MoodAnalyser", "happy");
+            //Assert          
+            expected.Equals(result);
+        }
 
+        /// <summary>
+        /// UC 5.2 : Given an improper class name should throw mood analysis exception.
+        /// </summary>
+        [Test]
+        public void UC5GivenImproperClassName_ShouldThrowMoodAnalysisException()
+        {
+            try
+            {
+                //Act
+                object result = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyzerProblemDifferent.MoodAnalyser", "MoodAnalyser", "happy");
+            }
+            catch (MoodAnalyserCustomException exception)
+            {
+                //Assert
+                Assert.AreEqual("Exception: class not found", exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// UC 5.3 : Given an improper constructor name should throw mood analysis exception.
+        /// </summary>
+        [Test]
+        public void UC5GivenImproperConstructorName_ShouldThrowMoodAnalysisException()
+        {
+            try
+            {
+                //Act
+                object result = MoodAnalyserFactory.CreateMoodAnalyserObject("MoodAnalyzerProblem.MoodAnalyser", "MoodAnalyserDifferent", "happy");
+            }
+            catch (MoodAnalyserCustomException exception)
+            {
+                //Assert
+                Assert.AreEqual("Exception: constructor not found", exception.Message);
+            }
+
+        }
     }
-}
 
+}
