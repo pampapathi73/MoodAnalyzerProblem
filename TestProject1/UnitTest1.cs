@@ -29,4 +29,15 @@ namespace TestProject1
 
 
         }
-}   }
+        [Test]
+        public void NullMessageTest()
+        {
+            //Arrange
+            MoodAnalyser moodAnalyser = new MoodAnalyser(null);
+            string expected = "Happy Mood";
+            //Act
+            string actual = moodAnalyser.AnalyseMood();
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+    }   }
